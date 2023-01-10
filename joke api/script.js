@@ -20,8 +20,10 @@ button.addEventListener("click", () => {
     .catch((err) => console.error(err));
 });
 
+
+
 const encodedParams = new URLSearchParams();
-encodedParams.append("src", "Hello, world!");
+encodedParams.append("src", "i am a girl");
 encodedParams.append("hl", "en-us");
 encodedParams.append("r", "0");
 encodedParams.append("c", "mp3");
@@ -38,9 +40,10 @@ const options = {
 };
 
 fetch(
-  "https://voicerss-text-to-speech.p.rapidapi.com/?key=5a1ebb0a983d432a8ee6cc19c70dd6e8",
+  "https://voicerss-text-to-speech.p.rapidapi.com/?key=ac106055ad914e2da07fe33a50b25e2f",
   options
 )
   .then((response) => response.json())
   .then((response) => console.log(response))
   .catch((err) => console.error(err));
+  //已輸入api key endpoint測試成功,為什麼還顯示script.js:48 SyntaxError: Unexpected token 'I', "ID3"... is not valid JSON
