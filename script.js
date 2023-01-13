@@ -16,34 +16,36 @@ button.addEventListener("click", () => {
     options
   )
     .then((response) => response.json())
-    .then((response) => console.log(response.jokes[0].joke))
+    .then((response) => {
+      
+      const encodedParams = new URLSearchParams();
+      encodedParams.append("src", response.jokes[0].joke);
+      encodedParams.append("hl", "en-us");
+      encodedParams.append("r", "0");
+      encodedParams.append("c", "mp3");
+      encodedParams.append("b64", "true");
+      encodedParams.append("f", "8khz_8bit_mono");
+
+      const options = {
+        method: "POST",
+        headers: {
+          "content-type": "application/x-www-form-urlencoded",
+          "X-RapidAPI-Key": "c3b58df377msh570c59f3f682c0ep1d6a2ajsn2e0951e6da44",
+          "X-RapidAPI-Host": "voicerss-text-to-speech.p.rapidapi.com",
+        },
+        body: encodedParams,
+      };
+
+      fetch(
+        "https://voicerss-text-to-speech.p.rapidapi.com/?key=ac106055ad914e2da07fe33a50b25e2f",
+        options
+      )
+        .then((response) => response.text())
+        .then((response) => {
+          document.getElementById("test").src = response;
+        })
+        .catch((err) => console.error(err));
+    })
     .catch((err) => console.error(err));
 });
 
-
-
-const encodedParams = new URLSearchParams();
-encodedParams.append("src", "i am a girl");
-encodedParams.append("hl", "en-us");
-encodedParams.append("r", "0");
-encodedParams.append("c", "mp3");
-encodedParams.append("f", "8khz_8bit_mono");
-
-const options = {
-  method: "POST",
-  headers: {
-    "content-type": "application/x-www-form-urlencoded",
-    "X-RapidAPI-Key": "c3b58df377msh570c59f3f682c0ep1d6a2ajsn2e0951e6da44",
-    "X-RapidAPI-Host": "voicerss-text-to-speech.p.rapidapi.com",
-  },
-  body: encodedParams,
-};
-
-fetch(
-  "https://voicerss-text-to-speech.p.rapidapi.com/?key=ac106055ad914e2da07fe33a50b25e2f",
-  options
-)
-  .then((response) => response.json())
-  .then((response) => console.log(response))
-  .catch((err) => console.error(err));
-  //已輸入api key endpoint測試成功,為什麼還顯示script.js:48 SyntaxError: Unexpected token 'I', "ID3"... is not valid JSON
